@@ -1,0 +1,15 @@
+Opened Rviz in a new terminal using these three steps:
+
+source /opt/ros/noetic/setup.bash
+source ~/arctos_ws/devel/setup.bash
+roslaunch arctos_config demo.launch
+
+
+Opened a new terminal
+cd ~/arctos_ws/src/arctos_scripts/scripts
+All three files are located in this folder. The one that works is the make_9_points
+
+Every time a new change is made, did: chmod +x name_of_file.py
+
+In same terminal, in scripts directory, did the following:
+rosrun arctos_scripts make_9_points.py
