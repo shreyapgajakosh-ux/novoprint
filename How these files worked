@@ -6,10 +6,12 @@ roslaunch arctos_config demo.launch
 
 
 Opened a new terminal
+source /opt/ros/noetic/setup.bash
+source ~/arctos_ws/devel/setup.bash
 cd ~/arctos_ws/src/arctos_scripts/scripts
 All three files are located in this folder. The one that works is the make_9_points
 
-Every time a new change is made, did: chmod +x name_of_file.py
+Every time a new change is made, did the following to make the file executable: chmod +x name_of_file.py
 
 In same terminal, in scripts directory, did the following:
 rosrun arctos_scripts make_9_points.py
