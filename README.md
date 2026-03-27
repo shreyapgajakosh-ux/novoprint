@@ -1,4 +1,2 @@
 # novoprint
-This is the code that makes the arm go to the 9 points right now.
-
-Where it says main, go to master
+All changes are under master branch. There is a README.md file in that branch with directions 
