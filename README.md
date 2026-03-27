@@ -1,12 +1,13 @@
 # novoprint
 General steps for both 9 points and block I
+--
 Terminal 1: 
 source /opt/ros/noetic/setup.bash  
 source ~/arctos_ws/devel/setup.bash   
 roslaunch arctos_config demo.launch  
 
 Wait until arm fully loads in Rviz    
----
+
 Terminal 2:   
 cd ~/arctos_ws/src/arctos_scripts/scripts  
 source /opt/ros/noetic/setup.bash  
@@ -19,6 +20,7 @@ chmod +x block_i.py
 rosrun arctos_scripts block_i.py   
 
 My file oganization might be different.  
+--
 cd is ./arctos_ws/src and this is my file organization  
 
 arctos_scripts  CMakeLists.txt  ROS  
