@@ -1,11 +1,11 @@
 # novoprint
 
 Terminal 1: 
-source /opt/ros/noetic/setup.bash
-source ~/arctos_ws/devel/setup.bash 
-roslaunch arctos_config demo.launch
+source /opt/ros/noetic/setup.bash  
+source ~/arctos_ws/devel/setup.bash   
+roslaunch arctos_config demo.launch  
 
-Wait until arm fully loads in Rviz 
+Wait until arm fully loads in Rviz   
 
 Terminal 2: 
 cd ~/arctos_ws/src/arctos_scripts/scripts
