@@ -19,7 +19,7 @@ If you want to run block I, do the following in terminal 2 with terminal 1 still
 chmod +x block_i.py    
 rosrun arctos_scripts block_i.py   
 
-My file oganization might be different.  
+My file oganization might be different  
 --
 cd is ./arctos_ws/src and this is my file organization  
 
