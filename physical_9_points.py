@@ -4,34 +4,33 @@ import sys
 import rospy
 import moveit_commander
 from geometry_msgs.msg import Pose
+from std_msgs.msg import String  # <--- Added for communication
 from tf.transformations import quaternion_from_euler
 import copy
 import time
 
+# --- NEW: Setup Publisher for rosjog.py ---
+ui_pub = rospy.Publisher('/ui_command', String, queue_size=10)
+
+def send_to_physical_arm(group):
+    """Gets current joint values and sends them to rosjog.py"""
+    joints = group.get_current_joint_values()
+    # Format: go_to_joint_state,j1,j2,j3,j4,j5,j6
+    msg = "go_to_joint_state," + ",".join([str(j) for j in joints])
+    ui_pub.publish(msg)
+    rospy.loginfo(f"Sent to CAN: {msg}")
+
+# --- Standard MoveIt Setup ---
 qx, qy, qz, qw = quaternion_from_euler(0, -1.5708, 0)
-
 moveit_commander.roscpp_initialize(sys.argv)
-rospy.init_node("cartesian_three_points")
-
+rospy.init_node("cartesian_nine_points")
 
 group = moveit_commander.MoveGroupCommander("arm")
-
 waypoints = []
-
-# Starting pose
-#start_pose = [0,0,0,0,0,0]
-#group.go(start_pose, wait=True)
-
 start_pose = group.get_current_pose().pose
-#print(start_pose)
-#waypoints.append(start_pose)
 
-
-x = 0.3
-y = -0.21
-z = 0.1796
+x, y, z = 0.3, -0.21, 0.1796
 delta = 0.1
-
 
 # Point 1
 pose1 = copy.deepcopy(start_pose)
@@ -138,20 +137,25 @@ pose9.orientation.z = qz
 pose9.orientation.w = qw
 waypoints.append(pose9)
 
-(plan, fraction) = group.compute_cartesian_path(
-    waypoints,
-    0.01,   # eef_step (resolution)
-    True     # jump_threshold
-)
+# Compute and Execute Cartesian Path
+(plan, fraction) = group.compute_cartesian_path(waypoints, 0.01, True)
 
-print("Path fraction:", fraction)
-group.execute(plan, wait=True)
-group.stop()
+if fraction > 0.9: # Only execute if most of the path was planned
+    print("Path fraction:", fraction)
+    group.execute(plan, wait=True)
+    
+    # --- NEW: Tell the physical arm to move after the path finishes ---
+    send_to_physical_arm(group)
+else:
+    print("Path planning failed or fraction too low.")
 
 rospy.sleep(1)
 
-group.set_start_state_to_current_state()
-time.sleep(10)
+# Return Home
 group.set_named_target("home")
 group.go(wait=True)
+
+# --- NEW: Tell the physical arm to move home ---
+send_to_physical_arm(group)
+
 group.stop()

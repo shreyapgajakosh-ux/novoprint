@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+
+import sys
+import rospy
+import moveit_commander
+from geometry_msgs.msg import Pose
+from tf.transformations import quaternion_from_euler
+import copy
+import time
+
+qx, qy, qz, qw = quaternion_from_euler(0, -1.5708, 0)
+
+moveit_commander.roscpp_initialize(sys.argv)
+rospy.init_node("cartesian_three_points")
+
+
+group = moveit_commander.MoveGroupCommander("arm")
+
+waypoints = []
+
+# Starting pose
+#start_pose = [0,0,0,0,0,0]
+#group.go(start_pose, wait=True)
+
+start_pose = group.get_current_pose().pose
+#print(start_pose)
+#waypoints.append(start_pose)
+
+
+x = 0.4
+y = -0.31
+z = 0.1796
+delta = 0.05
+
+
+# Point 1
+pose1 = copy.deepcopy(start_pose)
+pose1.position.x = x 
+pose1.position.y = y
+pose1.position.z = z
+pose1.orientation.x = qx
+pose1.orientation.y = qy
+pose1.orientation.z = qz
+pose1.orientation.w = qw
+
+waypoints.append(pose1)
+
+# Point 2
+pose2 = copy.deepcopy(start_pose)
+pose2.position.x = x - delta
+pose2.position.y = y
+pose2.position.z = z
+pose2.orientation.x = qx
+pose2.orientation.y = qy
+pose2.orientation.z = qz
+pose2.orientation.w = qw
+waypoints.append(pose2)
+
+# Point 3
+pose3 = copy.deepcopy(start_pose) 
+pose3.position.x = x - 2*delta
+pose3.position.y = y 
+pose3.position.z = z
+pose3.orientation.x = qx
+pose3.orientation.y = qy
+pose3.orientation.z = qz
+pose3.orientation.w = qw
+
+waypoints.append(pose3)
+
+# Point 4
+pose4 = copy.deepcopy(start_pose)
+pose4.position.x = x - 3*delta
+pose4.position.y = y 
+pose4.position.z = z
+pose4.orientation.x = qx
+pose4.orientation.y = qy
+pose4.orientation.z = qz
+pose4.orientation.w = qw
+
+waypoints.append(pose4)
+
+# Point 5
+pose5 = copy.deepcopy(start_pose)
+pose5.position.x = x - 3*delta
+pose5.position.y = y + delta
+pose5.position.z = z
+pose5.orientation.x = qx
+pose5.orientation.y = qy
+pose5.orientation.z = qz
+pose5.orientation.w = qw
+
+waypoints.append(pose5)
+
+# Point 6
+pose6 = copy.deepcopy(start_pose)
+pose6.position.x = x - 2*delta
+pose6.position.y = y + delta
+pose6.position.z = z
+pose6.orientation.x = qx
+pose6.orientation.y = qy
+pose6.orientation.z = qz
+pose6.orientation.w = qw
+
+waypoints.append(pose6)
+
+# Point 7
+pose7 =  copy.deepcopy(start_pose)
+pose7.position.x = x - 2*delta
+pose7.position.y = y + 2*delta
+pose7.position.z = z
+pose7.orientation.x = qx
+pose7.orientation.y = qy
+pose7.orientation.z = qz
+pose7.orientation.w = qw
+waypoints.append(pose7)
+
+# Point 8
+pose8 = copy.deepcopy(start_pose)
+pose8.position.x = x - 2*delta
+pose8.position.y = y + 3*delta
+pose8.position.z = z
+pose8.orientation.x = qx
+pose8.orientation.y = qy
+pose8.orientation.z = qz
+pose8.orientation.w = qw
+
+waypoints.append(pose8)
+
+# Point 9
+pose9 = copy.deepcopy(start_pose)
+pose9.position.x = x - 3*delta
+pose9.position.y = y + 3*delta
+pose9.position.z = z
+pose9.orientation.x = qx
+pose9.orientation.y = qy
+pose9.orientation.z = qz
+pose9.orientation.w = qw
+waypoints.append(pose9)
+
+# Point 10
+pose10 = copy.deepcopy(start_pose)
+pose10.position.x = x - 3*delta
+pose10.position.y = y + 4*delta
+pose10.position.z = z
+pose10.orientation.x = qx
+pose10.orientation.y = qy
+pose10.orientation.z = qz
+pose10.orientation.w = qw
+waypoints.append(pose10)
+
+# Point 11
+pose11 = copy.deepcopy(start_pose)
+pose11.position.x = x - 2*delta
+pose11.position.y = y + 4*delta
+pose11.position.z = z
+pose11.orientation.x = qx
+pose11.orientation.y = qy
+pose11.orientation.z = qz
+pose11.orientation.w = qw
+waypoints.append(pose11)
+
+# Point 12
+pose12 = copy.deepcopy(start_pose)
+pose12.position.x = x - delta
+pose12.position.y = y + 4*delta
+pose12.position.z = z
+pose12.orientation.x = qx
+pose12.orientation.y = qy
+pose12.orientation.z = qz
+pose12.orientation.w = qw
+waypoints.append(pose12)
+
+# Point 13
+pose13 = copy.deepcopy(start_pose)
+pose13.position.x = x
+pose13.position.y = y + 4*delta
+pose13.position.z = z
+pose13.orientation.x = qx
+pose13.orientation.y = qy
+pose13.orientation.z = qz
+pose13.orientation.w = qw
+waypoints.append(pose13)
+
+# Point 14
+pose14 = copy.deepcopy(start_pose)
+pose14.position.x = x
+pose14.position.y = y + 3*delta
+pose14.position.z = z
+pose14.orientation.x = qx
+pose14.orientation.y = qy
+pose14.orientation.z = qz
+pose14.orientation.w = qw
+waypoints.append(pose14)
+
+# Point 15
+pose15 = copy.deepcopy(start_pose)
+pose15.position.x = x - delta
+pose15.position.y = y + 3*delta
+pose15.position.z = z
+pose15.orientation.x = qx
+pose15.orientation.y = qy
+pose15.orientation.z = qz
+pose15.orientation.w = qw
+waypoints.append(pose15)
+
+# Point 16
+pose16 = copy.deepcopy(start_pose)
+pose16.position.x = x - delta
+pose16.position.y = y + 2*delta
+pose16.position.z = z
+pose16.orientation.x = qx
+pose16.orientation.y = qy
+pose16.orientation.z = qz
+pose16.orientation.w = qw
+waypoints.append(pose16)
+
+# Point 17
+pose17 = copy.deepcopy(start_pose)
+pose17.position.x = x - delta
+pose17.position.y = y + delta
+pose17.position.z = z
+pose17.orientation.x = qx
+pose17.orientation.y = qy
+pose17.orientation.z = qz
+pose17.orientation.w = qw
+waypoints.append(pose17)
+
+
+# Point 18
+pose18 = copy.deepcopy(start_pose)
+pose18.position.x = x 
+pose18.position.y = y + delta
+pose18.position.z = z
+pose18.orientation.x = qx
+pose18.orientation.y = qy
+pose18.orientation.z = qz
+pose18.orientation.w = qw
+waypoints.append(pose18)
+
+
+
+
+
+(plan, fraction) = group.compute_cartesian_path(
+    waypoints,
+    0.01,   # eef_step (resolution)
+    True     # jump_threshold
+)
+
+print("Path fraction:", fraction)
+group.execute(plan, wait=True)
+group.stop()
+
+rospy.sleep(1)
+
+group.set_start_state_to_current_state()
+time.sleep(5)
+group.set_named_target("home")
+group.go(wait=True)
+group.stop()
