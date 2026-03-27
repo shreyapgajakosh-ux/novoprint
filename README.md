@@ -1,18 +1,22 @@
 # novoprint
-
+General steps for both 9 points and block I
 Terminal 1: 
 source /opt/ros/noetic/setup.bash  
 source ~/arctos_ws/devel/setup.bash   
 roslaunch arctos_config demo.launch  
 
 Wait until arm fully loads in Rviz    
-
+---
 Terminal 2:   
 cd ~/arctos_ws/src/arctos_scripts/scripts  
 source /opt/ros/noetic/setup.bash  
 source ~/arctos_ws/devel/setup.bash   
-chmod +x whateverfilename.py  
-rosrun arctos_scripts whateverfilename.py  
+chmod +x make_9_points.py  
+rosrun arctos_scripts make_9_points.py  
+
+If you want to run block I, do the following in terminal 2 with terminal 1 still open  
+chmod +x block_i.py    
+rosrun arctos_scripts block_i.py   
 
 My file oganization might be different.  
 cd is ./arctos_ws/src and this is my file organization  
