@@ -1,6 +1,5 @@
 # novoprint
 
-
 Terminal 1: 
 source /opt/ros/noetic/setup.bash
 source ~/arctos_ws/devel/setup.bash 
